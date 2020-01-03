@@ -11,6 +11,7 @@
     },
     "scripts": {
         "dev": "cd frontend && yarn dev && cd .. && cd backend && yarn dev && cd ..",
+        "dev-server": "cd backend && yarn dev && cd ..",
         "start": "cd backend && node src/index.js",
         "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
     },
@@ -23,6 +24,9 @@
     },
     "homepage": "https://vendeste.herokuapp.com/",
     "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.8.4"
     }
 }

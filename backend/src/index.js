@@ -1,6 +1,7 @@
 // const cors = require("cors");
-const express = require("express");
 const dotenv = require("dotenv");
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const routes = require("./routes");
 const database = require("./database");
@@ -15,6 +16,7 @@ app.disable("x-powered-by");
 database.connect();
 
 // app.use(cors());
+app.use(bodyParser.json());
 app.use(routes);
 
 app.listen(port, () => {

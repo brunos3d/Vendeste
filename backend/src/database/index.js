@@ -6,5 +6,5 @@ exports.connect = function() {
 
     const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
 
-    mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 };

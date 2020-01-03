@@ -10,11 +10,15 @@ app.disable("x-powered-by");
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
 app.get("/products", (req, res) => {
     const products = ["Maçã", "Banana", "Abacaxi", "Goiaba", "Limão"];
     return res.send(products);
+});
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "../../frontend/build"));
 });
 
 app.listen(port, () => {

@@ -1,0 +1,19 @@
+{
+    "name": "vendeste",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "Bruno Silva",
+    "description": "Plataforma de compra e vendas.",
+    "scripts": {
+        "start": "cd backend && node src/index.js",
+        "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BrunoS3D/Vendeste.git"
+    },
+    "bugs": {
+        "url": "https://github.com/BrunoS3D/Vendeste/issues"
+    },
+    "homepage": "https://vendeste.herokuapp.com/"
+}

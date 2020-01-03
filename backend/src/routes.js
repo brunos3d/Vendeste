@@ -3,10 +3,10 @@ const express = require("express");
 
 const routes = express.Router();
 
-const { projects } = require("./controllers/Project");
-const { products } = require("./controllers/Product");
+const { projects } = require("./controllers/project");
+const { products } = require("./controllers/product");
 const { authMiddleware } = require("./middlewares/auth");
-const { register, authenticate } = require("./controllers/Auth");
+const { register, authenticate } = require("./controllers/auth");
 
 routes.post("/auth/register", register);
 routes.post("/auth/authenticate", authenticate);

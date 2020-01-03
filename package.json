@@ -22,11 +22,5 @@
     "bugs": {
         "url": "https://github.com/BrunoS3D/Vendeste/issues"
     },
-    "homepage": "https://vendeste.herokuapp.com/",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "body-parser": "^1.19.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.8.4"
-    }
+    "homepage": "https://vendeste.herokuapp.com/"
 }

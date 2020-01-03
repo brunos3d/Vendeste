@@ -1,6 +1,8 @@
 const path = require("path");
-const cors = require("cors");
+// const cors = require("cors");
 const express = require("express");
+
+const routes = require("./routes");
 
 const port = process.env.PORT || 3333;
 
@@ -8,19 +10,19 @@ const app = express();
 
 app.disable("x-powered-by");
 
-app.use(cors());
+// app.use(cors());
+app.use(routes);
 
 app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
-app.get("/products", (req, res) => {
-    const products = ["Maçã", "Banana", "Abacaxi", "Goiaba", "Limão"];
-    return res.send(products);
+app.get(["/", "/index", "/home", "/index.html"], (req, res) => {
+    res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "../../frontend/build"));
+    res.status(404).send("ERRO :[");
 });
 
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}!`);
+    console.log(`Server listening on: http://localhost:${port}`);
 });

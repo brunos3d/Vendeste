@@ -12,7 +12,7 @@
         "react-scripts": "3.3.0"
     },
     "scripts": {
-        "dev": "set NODE_ENV='development' && react-scripts start",
+        "dev": "set NODE_ENV='development' && react-scripts build",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",

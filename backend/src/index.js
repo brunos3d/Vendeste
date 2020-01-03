@@ -6,10 +6,12 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const database = require("./database");
 
-dotenv.config({ path: ".env.development.local" });
+if (process.env.NODE_ENV === "development") {
+    dotenv.config({ path: ".env.development.local" });
+}
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3333;
 
 app.disable("x-powered-by");
 

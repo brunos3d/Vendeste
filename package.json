@@ -21,5 +21,8 @@
     "bugs": {
         "url": "https://github.com/BrunoS3D/Vendeste/issues"
     },
-    "homepage": "https://vendeste.herokuapp.com/"
+    "homepage": "https://vendeste.herokuapp.com/",
+    "dependencies": {
+        "mongoose": "^5.8.4"
+    }
 }

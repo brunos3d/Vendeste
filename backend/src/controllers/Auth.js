@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const User = require("../models/User");
+const UserModel = require("../models/User");
 
 function generateToken(params = {}) {
     return jwt.sign(params, process.env.APP_SECRET, {
@@ -14,10 +14,10 @@ module.exports = {
         const { email } = req.body;
         try {
             // console.log(req.body);
-            if (await User.findOne({ email })) {
+            if (await UserModel.findOne({ email })) {
                 return res.status(400).send({ error: "Este email já está cadastrado!" });
             }
-            const user = await User.create(req.body);
+            const user = await UserModel.create(req.body);
 
             user.password = undefined;
 
@@ -29,7 +29,11 @@ module.exports = {
     async authenticate(req, res) {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email }).select("+password");
+        console.log(UserModel);
+
+        const user = await UserModel.findOne({ email }).select("+password");
+
+        console.log(user);
 
         if (!user) {
             return res.status(400).send({ error: "Usuário não encontrado!" });

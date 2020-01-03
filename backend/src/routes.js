@@ -3,10 +3,10 @@ const express = require("express");
 
 const routes = express.Router();
 
-const authMiddleware = require("./middlewares/auth");
-const { projects } = require("./controllers/projectController");
-const { products } = require("./controllers/productController");
-const { register, authenticate } = require("./controllers/authController");
+const { projects } = require("./controllers/Project");
+const { products } = require("./controllers/Product");
+const { authMiddleware } = require("./middlewares/Auth");
+const { register, authenticate } = require("./controllers/Auth");
 
 routes.post("/auth/register", register);
 routes.post("/auth/authenticate", authenticate);
@@ -19,7 +19,9 @@ routes.get("/products", products);
 routes.use(express.static(path.join(__dirname, "../../frontend/build")));
 
 routes.get(["/", "/index", "/home", "/index.html"], (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+    if (req.userId) {
+        res.sendFile(path.join(__dirname, "../../frontend/build/index.html"));
+    }
 });
 
 routes.get("*", (req, res) => {

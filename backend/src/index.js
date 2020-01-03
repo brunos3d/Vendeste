@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const database = require("./database");
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV.includes("development")) {
     dotenv.config({ path: ".env.development.local" });
 }
 

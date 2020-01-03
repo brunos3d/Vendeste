@@ -4,6 +4,11 @@
     "version": "1.0.0",
     "author": "Bruno Silva",
     "description": "Plataforma de compra e vendas.",
+    "engines": {
+        "node": "12.13.0",
+        "npm": "6.12.1",
+        "yarn": "1.19.2"
+    },
     "scripts": {
         "start": "cd backend && node src/index.js",
         "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."

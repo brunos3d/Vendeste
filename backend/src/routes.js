@@ -1,20 +1,13 @@
 const path = require("path");
 const express = require("express");
 
+const apiRouter = require("./routes/api");
+const authRouter = require("./routes/auth");
+
 const routes = express.Router();
 
-const { projects } = require("./controllers/project");
-const { products } = require("./controllers/product");
-const { authMiddleware } = require("./middlewares/auth");
-const { register, authenticate } = require("./controllers/auth");
-
-routes.post("/auth/register", register);
-routes.post("/auth/authenticate", authenticate);
-
-routes.use(authMiddleware);
-
-routes.get("/projects", projects);
-routes.get("/products", products);
+routes.use("/api", apiRouter);
+routes.use("/auth", authRouter);
 
 routes.use(express.static(path.join(__dirname, "../../frontend/build")));
 

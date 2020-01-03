@@ -19,16 +19,9 @@
         "yarn": "1.19.2"
     },
     "scripts": {
-        "dev": "set NODE_ENV=development && cd backend && nodemon src/index.js && cd ..",
+        "dev": "cd backend && yarn dev && cd ..",
+        "dev-full": "cd frontend && yarn dev && cd .. && cd backend && yarn dev && cd ..",
         "start": "cd backend && node src/index.js && cd ..",
         "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
-    },
-    "dependencies": {
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "bcryptjs": "^2.4.3",
-        "body-parser": "^1.19.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.8.4"
     }
 }

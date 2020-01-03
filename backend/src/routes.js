@@ -5,7 +5,7 @@ const routes = express.Router();
 
 const { projects } = require("./controllers/Project");
 const { products } = require("./controllers/Product");
-const { authMiddleware } = require("./middlewares/Auth");
+const { authMiddleware } = require("./middlewares/auth");
 const { register, authenticate } = require("./controllers/Auth");
 
 routes.post("/auth/register", register);

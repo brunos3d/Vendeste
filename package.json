@@ -3,18 +3,9 @@
     "license": "MIT",
     "version": "1.0.0",
     "author": "Bruno Silva",
+    "homepage": "https://vendeste.herokuapp.com/",
     "description": "Plataforma de compra e vendas.",
-    "engines": {
-        "node": "12.13.1",
-        "npm": "6.12.1",
-        "yarn": "1.19.2"
-    },
-    "scripts": {
-        "dev": "cd frontend && yarn dev && cd .. && cd backend && yarn dev && cd ..",
-        "dev-server": "cd backend && yarn dev && cd ..",
-        "start": "cd backend && node src/index.js",
-        "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
-    },
+    "main": "backend/src/index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/BrunoS3D/Vendeste.git"
@@ -22,5 +13,22 @@
     "bugs": {
         "url": "https://github.com/BrunoS3D/Vendeste/issues"
     },
-    "homepage": "https://vendeste.herokuapp.com/"
+    "engines": {
+        "node": "12.13.1",
+        "npm": "6.12.1",
+        "yarn": "1.19.2"
+    },
+    "scripts": {
+        "dev": "set NODE_ENV=development && cd backend && nodemon src/index.js && cd ..",
+        "start": "cd backend && node src/index.js",
+        "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
+    },
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.8.4"
+    }
 }

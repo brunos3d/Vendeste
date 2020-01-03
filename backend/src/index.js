@@ -6,8 +6,9 @@ const bodyParser = require("body-parser");
 const routes = require("./routes");
 const database = require("./database");
 
-if (process.env.NODE_ENV.includes("development")) {
+if ((process.env.NODE_ENV || "return").includes("development")) {
     dotenv.config({ path: ".env.development.local" });
+    console.warn("=== MODO DE DESENVOLVIMENTO ATIVO! ===");
 }
 
 const app = express();
@@ -22,5 +23,5 @@ app.use(bodyParser.json());
 app.use(routes);
 
 app.listen(port, () => {
-    console.log(`Server listening on: http://localhost:${port}`);
+    console.log(`Server sendo escutado na porta: http://localhost:${port}`);
 });

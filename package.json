@@ -20,8 +20,8 @@
     },
     "scripts": {
         "dev": "set NODE_ENV=development && cd backend && nodemon src/index.js && cd ..",
-        "start": "cd backend && node src/index.js",
-        "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
+        "start": "cd backend && node src/index.js && cd ..",
+        "build": "cd backend && npm install && cd .. && cd frontend && npm install && npm run build && cd .."
     },
     "dependencies": {
         "dotenv": "^8.2.0",

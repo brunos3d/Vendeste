@@ -15,7 +15,7 @@ if (development_mode) {
 }
 
 const port = process.env.PORT;
-const protocol = development_mode ? "http" : "https";
+const protocol = "http"; //development_mode ? "http" : "https";
 const api_url = `${protocol}://localhost:${port}/api`;
 
 database.connect();
@@ -44,6 +44,6 @@ app.prepare().then(() => {
 
     server.listen(port, error => {
         if (error) throw error;
-        console.log(`Server sendo escutado na porta: http://localhost:${port}`);
+        console.log(`Server sendo escutado na porta: ${protocol}://localhost:${port}`);
     });
 });

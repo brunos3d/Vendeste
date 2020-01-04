@@ -7,14 +7,12 @@ export const Container = styled.div`
         font-size: 16px;
     }
 
-    /* Reset top and bottom margins from certain elements */
     .login-header,
     & p {
         margin-top: 0;
         margin-bottom: 0;
     }
 
-    /* The triangle form is achieved by a CSS hack */
     .login-triangle {
         width: 0;
         margin-right: auto;
@@ -29,7 +27,6 @@ export const Container = styled.div`
         font-size: 1.4em;
         font-weight: normal;
         text-align: center;
-        text-transform: uppercase;
         color: #fff;
     }
 
@@ -38,7 +35,6 @@ export const Container = styled.div`
         padding: 12px;
     }
 
-    /* Every row inside .login-container is defined with p tags */
     & p {
         padding: 12px;
     }
@@ -62,7 +58,6 @@ export const Container = styled.div`
         color: #555;
     }
 
-    /* Text fields' focus effect */
     & input[type="email"]:focus,
     & input[type="password"]:focus {
         border-color: #888;
@@ -79,7 +74,6 @@ export const Container = styled.div`
         background: #17c;
     }
 
-    /* Buttons' focus effect */
     & input[type="submit"]:focus {
         border-color: #05a;
     }

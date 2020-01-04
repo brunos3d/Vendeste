@@ -4,7 +4,7 @@ import Test from "../frontend/components/Test";
 
 const Index = ({ products }) => {
     return (
-        <div className="App">
+        <>
             <Head>
                 <title>Vendeste</title>
             </Head>
@@ -14,7 +14,7 @@ const Index = ({ products }) => {
                     Produto {id}: {product}
                 </div>
             ))}
-        </div>
+        </>
     );
 };
 

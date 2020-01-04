@@ -1,8 +1,13 @@
+import Head from "next/head";
+
 import Test from "../frontend/components/Test";
 
 const Index = ({ products }) => {
     return (
         <div className="App">
+            <Head>
+                <title>Vendeste</title>
+            </Head>
             <Test />
             {products.map((product, id) => (
                 <div key={id}>

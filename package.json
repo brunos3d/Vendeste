@@ -27,6 +27,7 @@
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "isomorphic-unfetch": "^3.0.0",
@@ -34,6 +35,10 @@
         "mongoose": "^5.8.4",
         "next": "^9.1.7",
         "react": "^16.12.0",
-        "react-dom": "^16.12.0"
+        "react-dom": "^16.12.0",
+        "styled-components": "^4.4.1"
+    },
+    "devDependencies": {
+        "babel-plugin-styled-components": "^1.10.6"
     }
 }

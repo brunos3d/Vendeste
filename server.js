@@ -3,8 +3,10 @@ const next = require("next");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
-const routes = require("./backend/routes");
 const fetch = require("isomorphic-unfetch");
+const cookieParser = require("cookie-parser");
+
+const routes = require("./backend/routes");
 const database = require("./backend/database");
 
 const development_mode = (process.env.NODE_ENV || "return").includes("development");
@@ -30,10 +32,18 @@ app.prepare().then(() => {
 
     // app.use(cors());
     server.use(bodyParser.json());
+    server.use(cookieParser(process.env.COOKIES_SECRET));
     server.use(routes);
 
     server.get("/", async (req, res) => {
         const response = await fetch(api_url + "/products");
+
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+
+        res.cookie("ttx", "hash bem loko", { expires, signed: true, httpOnly: true, secure: true });
+
+        // console.log(req.signedCookies["ttx"]);
 
         app.render(req, res, "/", { products: await response.json() });
     });

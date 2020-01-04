@@ -22,17 +22,24 @@ const api_url = `${protocol}://localhost:${port}/api`;
 
 database.connect();
 
-const app = next({ dev: development_mode });
-const handle = app.getRequestHandler();
+const nextapp = next({ dev: !development_mode });
+const handle = nextapp.getRequestHandler();
 
-app.prepare().then(() => {
+nextapp.prepare().then(() => {
     const server = express();
 
     server.disable("x-powered-by");
 
-    // app.use(cors());
+    // nextapp.use(cors());
     server.use(bodyParser.json());
     server.use(cookieParser(process.env.COOKIES_SECRET));
+
+    // passar a referencia de instancia do next para todas as rotas
+    server.use((req, res, next) => {
+        req.nextapp = nextapp;
+        next();
+    });
+
     server.use(routes);
 
     server.get("/", async (req, res) => {
@@ -45,7 +52,7 @@ app.prepare().then(() => {
 
         // console.log(req.signedCookies["ttx"]);
 
-        app.render(req, res, "/", { products: await response.json() });
+        nextapp.render(req, res, "/", { products: await response.json() });
     });
 
     server.get("*", (req, res) => {

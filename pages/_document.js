@@ -1,8 +1,6 @@
 import { ServerStyleSheet } from "styled-components";
 import Document, { Head, Main, NextScript } from "next/document";
 
-import { HtmlContainer } from "../frontend/styles/document";
-
 export default class MyDocument extends Document {
     static getInitialProps({ renderPage }) {
         const sheet = new ServerStyleSheet();
@@ -16,7 +14,7 @@ export default class MyDocument extends Document {
 
     render() {
         return (
-            <HtmlContainer lang="pt-BR">
+            <html lang="pt-BR">
                 <Head>
                     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
                     {this.props.styleTags}
@@ -25,7 +23,7 @@ export default class MyDocument extends Document {
                     <Main />
                     <NextScript />
                 </body>
-            </HtmlContainer>
+            </html>
         );
     }
 }

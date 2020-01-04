@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
     & {
         width: 400px;
-        margin: 16px auto;
         font-size: 16px;
     }
 
@@ -28,15 +27,23 @@ export const Container = styled.div`
         font-weight: normal;
         text-align: center;
         color: #fff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 
     .login-container {
-        background: #ebebeb;
+        background: #fff;
         padding: 12px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
     }
 
     & p {
         padding: 12px;
+    }
+
+    & h4 {
+        text-align: center;
     }
 
     & input {

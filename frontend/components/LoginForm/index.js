@@ -21,6 +21,11 @@ export default function LoginForm(props) {
             <h2 className="login-header">Entrar no Vendeste</h2>
 
             <form className="login-container">
+                {props.message && (
+                    <p>
+                        <h4>{props.message}</h4>
+                    </p>
+                )}
                 <p>
                     <input type="email" placeholder="Email" />
                 </p>

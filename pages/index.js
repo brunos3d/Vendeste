@@ -1,26 +1,29 @@
 import Head from "next/head";
 
+import Page from "../frontend/components/Page";
 import Test from "../frontend/components/Test";
 
 const Index = ({ products }) => {
     return (
         <>
-            <Head>
-                <title>Vendeste</title>
-            </Head>
-            <Test />
-            {products.map((product, id) => (
-                <div key={id}>
-                    Produto {id}: {product}
-                </div>
-            ))}
+            <Page title="Vendesto - Bem-vindo">
+                <Head>
+                    <title>Vendeste</title>
+                </Head>
+                <Test />
+                {products.map((product, id) => (
+                    <div key={id}>
+                        Produto {id}: {product}
+                    </div>
+                ))}
+            </Page>
         </>
     );
 };
 
 Index.getInitialProps = async ({ query }) => {
     // console.log(context);
-    return { products: query.products };
+    return { ...query };
 };
 
 export default Index;

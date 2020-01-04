@@ -1,15 +1,25 @@
 import App from "next/app";
 
-import { AppContainer } from "../frontend/styles/app";
-
 class MyApp extends App {
     render() {
         const { Component, pageProps } = this.props;
 
         return (
-            <AppContainer>
+            <>
+                <style jsx global>{`
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        font-family: "Open Sans", sans-serif;
+                    }
+
+                    body {
+                        background-color: #ededed;
+                    }
+                `}</style>
+
                 <Component {...pageProps} />
-            </AppContainer>
+            </>
         );
     }
 }

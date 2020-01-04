@@ -29,11 +29,11 @@ module.exports = {
     async authenticate(req, res) {
         const { email, password } = req.body;
 
-        console.log(UserModel);
+        // console.log(UserModel);
 
         const user = await UserModel.findOne({ email }).select("+password");
 
-        console.log(user);
+        // console.log(user);
 
         if (!user) {
             return res.status(400).send({ error: "Usuário não encontrado!" });

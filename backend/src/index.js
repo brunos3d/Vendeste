@@ -12,7 +12,7 @@ if ((process.env.NODE_ENV || "return").includes("development")) {
 }
 
 const app = express();
-const port = process.env.PORT || 3333;
+const port = process.env.PORT;
 
 app.disable("x-powered-by");
 

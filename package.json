@@ -19,9 +19,21 @@
         "yarn": "1.19.2"
     },
     "scripts": {
-        "dev": "cd backend && yarn dev && cd ..",
-        "dev-full": "cd frontend && yarn dev && cd .. && cd backend && yarn dev && cd ..",
-        "start": "cd backend && node src/index.js && cd ..",
-        "build": "cd backend && yarn && cd .. && cd frontend && yarn && yarn build && cd .."
+        "dev": "set NODE_ENV=development && nodemon server.js",
+        "build": "next build",
+        "start": "node server.js",
+        "heroku-postbuild": "yarn build"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "isomorphic-unfetch": "^3.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.8.4",
+        "next": "^9.1.7",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
     }
 }

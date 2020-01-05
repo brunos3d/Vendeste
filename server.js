@@ -1,13 +1,15 @@
 const next = require("next");
-// const cors = require("cors");
+const cors = require("cors");
+const axios = require("axios");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
-const fetch = require("isomorphic-unfetch");
 const cookieParser = require("cookie-parser");
 
 const routes = require("./backend/routes");
 const database = require("./backend/database");
+const UserModel = require("./backend/models/user");
+const { authMiddleware } = require("./backend/middlewares/auth");
 
 const development_mode = (process.env.NODE_ENV || "return").includes("development");
 
@@ -22,7 +24,7 @@ const api_url = `${protocol}://localhost:${port}/api`;
 
 database.connect();
 
-const nextapp = next({ dev: !development_mode });
+const nextapp = next({ dev: development_mode });
 const handle = nextapp.getRequestHandler();
 
 nextapp.prepare().then(() => {
@@ -30,7 +32,7 @@ nextapp.prepare().then(() => {
 
     server.disable("x-powered-by");
 
-    // nextapp.use(cors());
+    server.use(cors({ credentials: true, origin: "*" }));
     server.use(bodyParser.json());
     server.use(cookieParser(process.env.COOKIES_SECRET));
 
@@ -42,17 +44,29 @@ nextapp.prepare().then(() => {
 
     server.use(routes);
 
-    server.get("/", async (req, res) => {
-        const response = await fetch(api_url + "/products");
+    // test
+    server.get("/redirect/to/home", async (req, res) => {
+        res.redirect("/");
+    });
 
-        const expires = new Date();
-        expires.setDate(expires.getDate() + 7);
+    server.get("/", authMiddleware, async (req, res) => {
+        const response = await axios.get(api_url + "/products");
 
-        res.cookie("ttx", "hash bem loko", { expires, signed: true, httpOnly: true, secure: true });
+        // const expires = new Date();
+        // expires.setDate(expires.getDate() + 7);
+
+        // res.cookie("ttx", "hash bem loko", { expires, signed: true, httpOnly: true, secure: true });
 
         // console.log(req.signedCookies["ttx"]);
 
-        nextapp.render(req, res, "/", { products: await response.json() });
+        const indexProps = { products: response.data };
+
+        if (req.userId) {
+            const user = await UserModel.findById(req.userId);
+            indexProps.username = user.name;
+        }
+
+        nextapp.render(req, res, "/", indexProps);
     });
 
     server.get("*", (req, res) => {

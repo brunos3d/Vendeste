@@ -1,17 +1,30 @@
+import axios from "axios";
+import Router from "next/router";
 import React, { useState } from "react";
 
 import { Container } from "./styles";
 
 export default function LoginForm(props) {
+    const development_mode = (process.env.NODE_ENV || "return").includes("development");
+    const protocol = development_mode ? "http" : "https";
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-    }
-
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        axios
+            .post(`${protocol}://${window.location.host}/auth/authenticate`, {
+                withCredentials: true,
+                email,
+                password
+            })
+            .then(res => {
+                if (res.status == 200) {
+                    window.location.href = "/";
+                }
+            });
+        // console.log(test);
     }
 
     return (
@@ -20,17 +33,22 @@ export default function LoginForm(props) {
 
             <h2 className="login-header">Entrar no Vendeste</h2>
 
-            <form className="login-container">
-                {props.message && (
-                    <p>
-                        <h4>{props.message}</h4>
-                    </p>
-                )}
+            <form className="login-container" onSubmit={handleSubmit}>
                 <p>
-                    <input type="email" placeholder="Email" />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                    />
                 </p>
                 <p>
-                    <input type="password" placeholder="Senha" />
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        value={password}
+                        onChange={event => setPassword(event.target.value)}
+                    />
                 </p>
                 <p>
                     <input type="submit" value="Entrar" />

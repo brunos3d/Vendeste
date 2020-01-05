@@ -8,14 +8,13 @@ const Login = ({ status, error }) => {
             <Head>
                 <title>Login</title>
             </Head>
-            <LoginForm message={error} />
+            <LoginForm />
         </>
     );
 };
 
 Login.getInitialProps = async ctx => {
     const { query } = ctx;
-
     return { ...query };
 };
 

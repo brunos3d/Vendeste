@@ -1,16 +1,10 @@
-import Head from "next/head";
-
 import Page from "../frontend/components/Page";
-import Test from "../frontend/components/Test";
 
-const Index = ({ products }) => {
+const Index = ({ products, username }) => {
     return (
         <>
             <Page title="Vendesto - Bem-vindo">
-                <Head>
-                    <title>Vendeste</title>
-                </Head>
-                <Test />
+                <h1>{username}</h1>
                 {products.map((product, id) => (
                     <div key={id}>
                         Produto {id}: {product}

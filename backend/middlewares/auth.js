@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
     async authMiddleware(req, res, next) {
-        const authHeader = req.headers.authorization;
+        const authHeader = req.signedCookies["ttx"];
 
         if (!authHeader) {
             return req.nextapp.render(req, res, "/login", {

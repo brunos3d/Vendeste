@@ -10,6 +10,7 @@ export default function LoginForm(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [warningMessage, setWarningMessage] = useState("");
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -22,6 +23,9 @@ export default function LoginForm(props) {
             .then(res => {
                 if (res.status == 200) {
                     window.location.href = "/";
+                } else {
+                    console.log(res);
+                    setWarningMessage("HAHAHA");
                 }
             });
         // console.log(test);
@@ -31,7 +35,7 @@ export default function LoginForm(props) {
         <Container>
             <div className="login-triangle"></div>
 
-            <h2 className="login-header">Entrar no Vendeste</h2>
+            <h2 className="login-header">{warningMessage ? warningMessage : "Entrar no Vendeste"}</h2>
 
             <form className="login-container" onSubmit={handleSubmit}>
                 <p>

@@ -6,8 +6,7 @@ export const Container = styled.div`
         font-size: 16px;
     }
 
-    .login-header,
-    & p {
+    .login-header {
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -27,61 +26,16 @@ export const Container = styled.div`
         font-weight: normal;
         text-align: center;
         color: #fff;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     }
 
     .login-container {
         background: #fff;
         padding: 12px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-    & p {
-        padding: 12px;
-    }
-
-    & h4 {
-        text-align: center;
-    }
-
-    & input {
-        box-sizing: border-box;
-        display: block;
-        width: 100%;
-        border-width: 1px;
-        border-style: solid;
-        padding: 16px;
-        outline: 0;
-        font-family: inherit;
-        font-size: 0.95em;
-    }
-
-    & input[type="email"],
-    & input[type="password"] {
-        background: #fff;
-        border-color: #bbb;
-        color: #555;
-    }
-
-    & input[type="email"]:focus,
-    & input[type="password"]:focus {
-        border-color: #888;
-    }
-
-    & input[type="submit"] {
-        background: #28d;
-        border-color: transparent;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    & input[type="submit"]:hover {
-        background: #17c;
-    }
-
-    & input[type="submit"]:focus {
-        border-color: #05a;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     }
 `;

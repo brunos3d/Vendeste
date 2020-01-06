@@ -26,23 +26,22 @@ export default function LoginSignUpForm({ showTriangle }) {
             name,
             username,
             email,
-            password,
-            withCredentials: true
+            password
+        }).then(res => {
+            console.log(res);
+            if (res.status == 200) {
+                // window.location.href = "/";
+            }
         });
-        // .then(res => {
-        //     if (res.status == 200) {
-        //         window.location.href = "/";
-        //     }
-        // });
     }
 
     return (
         <Container>
-            <LoginForm header="Registrar-se no Vendeste" onSubmit={handleSubmit}>
+            <LoginForm header="Registrar-se no Vendeste" showTriangle={showTriangle} onSubmit={handleSubmit}>
                 <LoginInput
                     required
                     type="text"
-                    placeholder="Nome Completo"
+                    placeholder="Nome completo"
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
@@ -72,7 +71,7 @@ export default function LoginSignUpForm({ showTriangle }) {
                 <LoginInput
                     required
                     type="password"
-                    placeholder="Confirmar Senha"
+                    placeholder="Confirmar senha"
                     pattern={`^${password}$`}
                     title="As senhas informadas não coincidem!"
                     value={confirmPassword}

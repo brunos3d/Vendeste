@@ -5,8 +5,10 @@ const baseURL = (process.env.NODE_ENV || "return").includes("development")
     : "https://vendeste.herokuapp.com";
 
 const config = {
+    withCredentials: true,
     baseURL: baseURL + "/api"
 };
+
 if (process.browser) {
     config.headers = {
         Authorization: `Bearer ${localStorage.getItem("token")}`

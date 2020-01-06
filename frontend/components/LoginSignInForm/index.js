@@ -14,19 +14,18 @@ export default function LoginSignInForm({ showTriangle }) {
         event.preventDefault();
         api.post("/auth/authenticate", {
             email,
-            password,
-            withCredentials: true
+            password
+        }).then(res => {
+            console.log(res);
+            if (res.status == 200) {
+                // window.location.href = "/";
+            }
         });
-        // .then(res => {
-        //     if (res.status == 200) {
-        //         window.location.href = "/";
-        //     }
-        // });
     }
 
     return (
         <Container>
-            <LoginForm header="Entrar no Vendeste" onSubmit={handleSubmit}>
+            <LoginForm header="Entrar no Vendeste" showTriangle={showTriangle} onSubmit={handleSubmit}>
                 <LoginInput
                     required
                     type="email"

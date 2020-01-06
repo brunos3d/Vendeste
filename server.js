@@ -1,9 +1,11 @@
+// const cookieParser = require("cookie-parser");
 const next = require("next");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const connectMongo = require("connect-mongo");
 
 const routes = require("./backend/routes");
 const database = require("./backend/database");
@@ -15,10 +17,10 @@ if (development_mode) {
     console.warn("=== MODO DE DESENVOLVIMENTO ATIVO! ===");
 }
 
-const port = process.env.PORT;
-const protocol = "http"; //development_mode ? "http" : "https";
+const PORT = process.env.PORT;
 
-database.connect();
+const MongoStore = connectMongo(session);
+const db_connection = database.createConnection();
 
 const nextapp = next({ dev: development_mode });
 const handle = nextapp.getRequestHandler();
@@ -30,7 +32,19 @@ nextapp.prepare().then(() => {
 
     server.use(cors({ credentials: true, origin: "*" }));
     server.use(bodyParser.json());
-    server.use(cookieParser(process.env.COOKIES_SECRET));
+    // server.use(cookieParser(process.env.MONGO_SESSION_SECRET));
+
+    // iniciar sessao de usuário no mongo
+    // por padrão a sessao expira em 14 dias
+    server.use(
+        session({
+            secret: process.env.MONGO_SESSION_SECRET,
+            resave: true,
+            saveUninitialized: true,
+            cookie: { secure: !development_mode },
+            store: new MongoStore({ mongooseConnection: db_connection })
+        })
+    );
 
     // passar a referencia de instancia do next para todas as rotas
     server.use((req, res, next) => {
@@ -44,8 +58,8 @@ nextapp.prepare().then(() => {
         return handle(req, res);
     });
 
-    server.listen(port, error => {
+    server.listen(PORT, error => {
         if (error) throw error;
-        console.log(`Server sendo escutado na porta: ${protocol}://localhost:${port}`);
+        console.log(`Server sendo escutado na porta: http://localhost:${PORT}`);
     });
 });

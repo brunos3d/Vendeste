@@ -18,6 +18,7 @@ router.post("/register", async (req, res) => {
         if (await UserModel.findOne({ email })) {
             return res.status(400).send({ error: "Este email já está cadastrado!" });
         }
+
         const user = await UserModel.create(req.body);
 
         user.password = undefined;

@@ -1,7 +1,27 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = {
-    async authApiMiddleware(req, res, next) {
+    async tryAuthMiddleware(req, res, next) {
+        if (req.userId) {
+            return next();
+        }
+        const token = req.session.token;
+
+        if (token) {
+            jwt.verify(token, process.env.APP_SECRET, (error, decoded) => {
+                if (!error) {
+                    req.userId = decoded.id;
+                }
+                return next();
+            });
+        } else {
+            return next();
+        }
+    },
+    async apiAuthMiddleware(req, res, next) {
+        if (req.userId) {
+            return next();
+        }
         const token = req.session.token;
 
         if (!token) {
@@ -22,7 +42,10 @@ module.exports = {
             return next();
         });
     },
-    async authAppMiddleware(req, res, next) {
+    async appAuthMiddleware(req, res, next) {
+        if (req.userId) {
+            return next();
+        }
         const token = req.session.token;
 
         if (!token) {
@@ -35,7 +58,6 @@ module.exports = {
             }
 
             req.userId = decoded.id;
-
             return next();
         });
     }

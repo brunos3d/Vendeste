@@ -12,15 +12,18 @@ export default function LoginSignInForm({ showTriangle }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        api.post("/auth/authenticate", {
-            email,
-            password
-        }).then(res => {
-            console.log(res);
-            if (res.status == 200) {
-                // window.location.href = "/";
-            }
-        });
+
+        return api
+            .post("/auth/authenticate", {
+                email,
+                password
+            })
+            .then(res => {
+                console.log(res);
+                if (res.status == 200) {
+                    window.location.href = "/";
+                }
+            });
     }
 
     return (

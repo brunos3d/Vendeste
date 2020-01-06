@@ -40,7 +40,6 @@ nextapp.prepare().then(() => {
 
     server.use(cors({ credentials: true, origin: "*" }));
     server.use(bodyParser.json());
-    // server.use(cookieParser(process.env.MONGO_SESSION_SECRET));
 
     // iniciar sessao de usuário no mongo
     // por padrão a sessao expira em 14 dias

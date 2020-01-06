@@ -1,16 +1,9 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 const UserModel = require("../models/user");
 
 const router = express.Router();
-
-function generateToken(params = {}) {
-    return jwt.sign(params, process.env.APP_SECRET, {
-        expiresIn: process.env.TOKEN_EXPIRATION_TIME
-    });
-}
 
 router.post("/register", async (req, res) => {
     // try {
@@ -24,11 +17,9 @@ router.post("/register", async (req, res) => {
 
     user.password = undefined;
 
-    req.session.token = generateToken({ id: user.id });
+    req.session.userId = user.id;
     req.session.save(error => {
-        if (!error) {
-            res.send({ success: true });
-        }
+        if (!error) res.send({ success: true });
     });
     // } catch (error) {
     //     return res.status(400).send({ error: "Falha ao registrar usuário!" });
@@ -51,11 +42,9 @@ router.post("/authenticate", async (req, res) => {
 
     user.password = undefined;
 
-    req.session.token = generateToken({ id: user.id });
+    req.session.userId = user.id;
     req.session.save(error => {
-        if (!error) {
-            res.send({ success: true });
-        }
+        if (!error) res.send({ success: true });
     });
     // } catch (error) {
     //     return res.status(400).send({ error: "Falha ao autenticar usuário!" });

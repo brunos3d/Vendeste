@@ -17,7 +17,7 @@ const Index = ({ username, wishlist }) => {
 };
 
 Index.getInitialProps = async ({ query }) => {
-    return { ...query };
+    return { username: query.username, wishlist: query.wishlist };
 };
 
 export default Index;

@@ -5,8 +5,8 @@ const UserModel = require("../models/user");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    if (req.userId) {
-        const user = await UserModel.findById(req.userId);
+    if (req.session.userId) {
+        const user = await UserModel.findById(req.session.userId);
         if (user) {
             return req.nextapp.render(req, res, "/", {
                 username: user.name,
@@ -22,14 +22,14 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    if (req.userId) {
+    if (req.session.userId) {
         return res.redirect("/");
     }
     return req.nextapp.render(req, res, "/login");
 });
 
 router.get("/register", (req, res) => {
-    if (req.userId) {
+    if (req.session.userId) {
         return res.redirect("/");
     }
     return req.nextapp.render(req, res, "/register");

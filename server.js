@@ -17,10 +17,9 @@ if (development_mode) {
     console.warn("=== MODO DE DESENVOLVIMENTO ATIVO! ===");
 }
 
-const PORT = process.env.PORT;
+const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD } = process.env;
 
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const baseURL = development_mode ? `http://localhost:${PORT}` : "https://vendeste.herokuapp.com";
 
 const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
 
@@ -38,8 +37,7 @@ nextapp.prepare().then(() => {
 
     server.disable("x-powered-by");
 
-    server.use(cors());
-    // server.use(cors({ credentials: true, origin: "*" }));
+    server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
     // iniciar sessao de usuário no mongo
@@ -47,11 +45,13 @@ nextapp.prepare().then(() => {
     server.use(
         session({
             // tempo de vida do token (segundos)
-            ttl: process.env.TOKEN_EXPIRATION_TIME,
+            ttl: TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
             resave: true,
             saveUninitialized: true,
-            // cookie: { secure: !development_mode },
+            cookie: {
+                secure: "auto"
+            },
             store: new MongoStore({ mongooseConnection: mongoose.connection })
         })
     );

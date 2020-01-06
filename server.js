@@ -1,15 +1,14 @@
+// const cookieParser = require("cookie-parser");
 const next = require("next");
 const cors = require("cors");
-const axios = require("axios");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const connectMongo = require("connect-mongo");
 
 const routes = require("./backend/routes");
 const database = require("./backend/database");
-const UserModel = require("./backend/models/user");
-const { authMiddleware } = require("./backend/middlewares/auth");
 
 const development_mode = (process.env.NODE_ENV || "return").includes("development");
 
@@ -18,11 +17,10 @@ if (development_mode) {
     console.warn("=== MODO DE DESENVOLVIMENTO ATIVO! ===");
 }
 
-const port = process.env.PORT;
-const protocol = "http"; //development_mode ? "http" : "https";
-const api_url = `${protocol}://localhost:${port}/api`;
+const PORT = process.env.PORT;
 
-database.connect();
+const MongoStore = connectMongo(session);
+const db_connection = database.createConnection();
 
 const nextapp = next({ dev: development_mode });
 const handle = nextapp.getRequestHandler();
@@ -34,7 +32,19 @@ nextapp.prepare().then(() => {
 
     server.use(cors({ credentials: true, origin: "*" }));
     server.use(bodyParser.json());
-    server.use(cookieParser(process.env.COOKIES_SECRET));
+    // server.use(cookieParser(process.env.MONGO_SESSION_SECRET));
+
+    // iniciar sessao de usuário no mongo
+    // por padrão a sessao expira em 14 dias
+    server.use(
+        session({
+            secret: process.env.MONGO_SESSION_SECRET,
+            resave: true,
+            saveUninitialized: true,
+            cookie: { secure: !development_mode },
+            store: new MongoStore({ mongooseConnection: db_connection })
+        })
+    );
 
     // passar a referencia de instancia do next para todas as rotas
     server.use((req, res, next) => {
@@ -44,37 +54,12 @@ nextapp.prepare().then(() => {
 
     server.use(routes);
 
-    // test
-    server.get("/redirect/to/home", async (req, res) => {
-        res.redirect("/");
-    });
-
-    server.get("/", authMiddleware, async (req, res) => {
-        const response = await axios.get(api_url + "/products");
-
-        // const expires = new Date();
-        // expires.setDate(expires.getDate() + 7);
-
-        // res.cookie("ttx", "hash bem loko", { expires, signed: true, httpOnly: true, secure: true });
-
-        // console.log(req.signedCookies["ttx"]);
-
-        const indexProps = { products: response.data };
-
-        if (req.userId) {
-            const user = await UserModel.findById(req.userId);
-            indexProps.username = user.name;
-        }
-
-        nextapp.render(req, res, "/", indexProps);
-    });
-
     server.get("*", (req, res) => {
         return handle(req, res);
     });
 
-    server.listen(port, error => {
+    server.listen(PORT, error => {
         if (error) throw error;
-        console.log(`Server sendo escutado na porta: ${protocol}://localhost:${port}`);
+        console.log(`Server sendo escutado na porta: http://localhost:${PORT}`);
     });
 });

@@ -1,21 +1,20 @@
-import Head from "next/head";
+import { Container } from "../frontend/styles/login";
 
-import LoginForm from "../frontend/components/LoginForm";
+import PageInfo from "../frontend/components/PageInfo";
+import LoginSignInForm from "../frontend/components/LoginSignInForm";
 
-const Login = ({ status, error }) => {
+const Login = () => {
     return (
-        <>
-            <Head>
-                <title>Login</title>
-            </Head>
-            <LoginForm />
-        </>
+        <Container>
+            <PageInfo title="Vendesto - Entrar" description="Venha fazer parte do Vendesto" />
+            <LoginSignInForm />
+        </Container>
     );
 };
 
-Login.getInitialProps = async ctx => {
-    const { query } = ctx;
-    return { ...query };
-};
+// Login.getInitialProps = async ctx => {
+//     const { query } = ctx;
+//     return { ...query };
+// };
 
 export default Login;

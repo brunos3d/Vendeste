@@ -3,13 +3,14 @@ import Page from "../frontend/components/Page";
 const Index = ({ products, username }) => {
     return (
         <>
-            <Page title="Vendesto - Bem-vindo">
+            <Page title="Vendesto - Inicio">
                 <h1>{username}</h1>
-                {products.map((product, id) => (
-                    <div key={id}>
-                        Produto {id}: {product}
-                    </div>
-                ))}
+                {products &&
+                    products.map((product, id) => (
+                        <div key={id}>
+                            Produto {id}: {product}
+                        </div>
+                    ))}
             </Page>
         </>
     );

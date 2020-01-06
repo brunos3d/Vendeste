@@ -17,6 +17,7 @@ export const Container = styled.div`
         font-size: 0.95em;
     }
 
+    & input[type="text"],
     & input[type="email"],
     & input[type="password"] {
         background: #fff;
@@ -24,6 +25,7 @@ export const Container = styled.div`
         color: #555;
     }
 
+    & input[type="text"]:focus,
     & input[type="email"]:focus,
     & input[type="password"]:focus {
         border-color: #888;

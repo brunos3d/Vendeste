@@ -3,12 +3,12 @@ const next = require("next");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const connectMongo = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 
 const routes = require("./backend/routes");
-const database = require("./backend/database");
 
 const development_mode = (process.env.NODE_ENV || "return").includes("development");
 
@@ -19,8 +19,16 @@ if (development_mode) {
 
 const PORT = process.env.PORT;
 
-const MongoStore = connectMongo(session);
-const db_connection = database.createConnection();
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+
+const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
+
+mongoose.connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+});
 
 const nextapp = next({ dev: development_mode });
 const handle = nextapp.getRequestHandler();
@@ -38,11 +46,13 @@ nextapp.prepare().then(() => {
     // por padrão a sessao expira em 14 dias
     server.use(
         session({
+            // tempo de vida do token (segundos)
+            ttl: process.env.TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
             resave: true,
             saveUninitialized: true,
             cookie: { secure: !development_mode },
-            store: new MongoStore({ mongooseConnection: db_connection })
+            store: new MongoStore({ mongooseConnection: mongoose.connection })
         })
     );
 

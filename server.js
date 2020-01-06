@@ -51,7 +51,7 @@ nextapp.prepare().then(() => {
             secret: process.env.MONGO_SESSION_SECRET,
             resave: true,
             saveUninitialized: true,
-            cookie: { secure: !development_mode },
+            // cookie: { secure: !development_mode },
             store: new MongoStore({ mongooseConnection: mongoose.connection })
         })
     );

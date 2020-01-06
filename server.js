@@ -38,7 +38,8 @@ nextapp.prepare().then(() => {
 
     server.disable("x-powered-by");
 
-    server.use(cors({ credentials: true, origin: "*" }));
+    server.use(cors());
+    // server.use(cors({ credentials: true, origin: "*" }));
     server.use(bodyParser.json());
 
     // iniciar sessao de usuário no mongo

@@ -5,7 +5,8 @@ const baseURL = (process.env.NODE_ENV || "return").includes("development")
     : "https://vendeste.herokuapp.com";
 
 const config = {
-    baseURL: baseURL + "/api"
+    baseURL: baseURL + "/api",
+    withCredentials: true
 };
 
 const api = axios.create(config);

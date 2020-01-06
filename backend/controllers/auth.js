@@ -45,4 +45,5 @@ module.exports = {
         } catch (error) {
             return res.status(400).send({ error: "Falha ao autenticar usuário!" });
         }
-    });
+    }
+};

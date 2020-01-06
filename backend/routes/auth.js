@@ -13,45 +13,53 @@ function generateToken(params = {}) {
 }
 
 router.post("/register", async (req, res) => {
-    try {
-        const { email } = req.body;
+    // try {
+    const { email } = req.body;
 
-        if (await UserModel.findOne({ email })) {
-            return res.status(400).send({ error: "Este email já está cadastrado!" });
-        }
-
-        const user = await UserModel.create(req.body);
-
-        user.password = undefined;
-
-        req.session.token = generateToken({ id: user.id });
-        res.status(200).send({ success: true });
-    } catch (error) {
-        return res.status(400).send({ error: "Falha ao registrar usuário!" });
+    if (await UserModel.findOne({ email })) {
+        return res.status(400).send({ error: "Este email já está cadastrado!" });
     }
+
+    const user = await UserModel.create(req.body);
+
+    user.password = undefined;
+
+    req.session.token = generateToken({ id: user.id });
+    req.session.save(error => {
+        if (!error) {
+            res.send({ success: true });
+        }
+    });
+    // } catch (error) {
+    //     return res.status(400).send({ error: "Falha ao registrar usuário!" });
+    // }
 });
 
 router.post("/authenticate", async (req, res) => {
-    try {
-        const { email, password } = req.body;
+    // try {
+    const { email, password } = req.body;
 
-        const user = await UserModel.findOne({ email }).select("+password");
+    const user = await UserModel.findOne({ email }).select("+password");
 
-        if (!user) {
-            return res.status(400).send({ error: "Usuário não encontrado!" });
-        }
-
-        if (!bcrypt.compareSync(password, user.password)) {
-            return res.status(400).send({ error: "Senha inválida!" });
-        }
-
-        user.password = undefined;
-
-        req.session.token = generateToken({ id: user.id });
-        res.status(200).send({ success: true });
-    } catch (error) {
-        return res.status(400).send({ error: "Falha ao autenticar usuário!" });
+    if (!user) {
+        return res.status(400).send({ error: "Usuário não encontrado!" });
     }
+
+    if (!bcrypt.compareSync(password, user.password)) {
+        return res.status(400).send({ error: "Senha inválida!" });
+    }
+
+    user.password = undefined;
+
+    req.session.token = generateToken({ id: user.id });
+    req.session.save(error => {
+        if (!error) {
+            res.send({ success: true });
+        }
+    });
+    // } catch (error) {
+    //     return res.status(400).send({ error: "Falha ao autenticar usuário!" });
+    // }
 });
 
 module.exports = router;

@@ -8,13 +8,14 @@ const router = express.Router();
 
 function generateToken(params = {}) {
     return jwt.sign(params, process.env.APP_SECRET, {
-        expiresIn: 86400
+        expiresIn: process.env.TOKEN_EXPIRATION_TIME
     });
 }
 
 router.post("/register", async (req, res) => {
     try {
         const { email } = req.body;
+
         if (await UserModel.findOne({ email })) {
             return res.status(400).send({ error: "Este email já está cadastrado!" });
         }
@@ -23,7 +24,8 @@ router.post("/register", async (req, res) => {
 
         user.password = undefined;
 
-        res.send({ user, token: generateToken({ id: user.id }) });
+        req.session.token = generateToken({ id: user.id });
+        res.status(200).send({ success: true });
     } catch (error) {
         return res.status(400).send({ error: "Falha ao registrar usuário!" });
     }
@@ -45,7 +47,8 @@ router.post("/authenticate", async (req, res) => {
 
         user.password = undefined;
 
-        res.send({ user, token: generateToken({ id: user.id }) });
+        req.session.token = generateToken({ id: user.id });
+        res.status(200).send({ success: true });
     } catch (error) {
         return res.status(400).send({ error: "Falha ao autenticar usuário!" });
     }

@@ -36,4 +36,4 @@ User.getInitialProps = async ({ req, query }) => {
     return { user, ...query };
 };
 
-export default Index;
+export default User;

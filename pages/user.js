@@ -3,7 +3,7 @@ import { APIGet } from "../shared/services/api";
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
 
-const Index = ({ user }) => {
+const User = ({ user }) => {
     const { name, username, email, wishlist } = user;
 
     return (
@@ -25,7 +25,7 @@ const Index = ({ user }) => {
     );
 };
 
-Index.getInitialProps = async ({ req, query }) => {
+User.getInitialProps = async ({ req, query }) => {
     let { user } = query;
 
     if (!user) {

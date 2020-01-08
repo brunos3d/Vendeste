@@ -17,7 +17,7 @@ if (development_mode) {
     console.warn("=== MODO DE DESENVOLVIMENTO ATIVO! ===");
 }
 
-const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD } = process.env;
+const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD, MONGO_SESSION_SECRET, COOKIE_MAX_AGE } = process.env;
 
 const baseURL = development_mode ? `http://localhost:${PORT}` : "https://vendeste.herokuapp.com";
 
@@ -45,6 +45,7 @@ nextapp.prepare().then(() => {
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
+    // server.use(cookieParser());
     // iniciar sessao de usuário no mongo
     // por padrão a sessao expira em 14 dias
     server.use(
@@ -57,12 +58,10 @@ nextapp.prepare().then(() => {
             saveUninitialized: false,
             // tempo de vida do token (segundos)
             ttl: TOKEN_EXPIRATION_TIME,
-            secret: process.env.MONGO_SESSION_SECRET,
+            secret: MONGO_SESSION_SECRET,
             cookie: {
                 httpOnly: false,
                 secure: !development_mode
-                // tempo de vida do cookie (milisegundos)
-                // maxAge: process.env.COOKIE_MAX_AGE
             },
             store: new MongoStore({ mongooseConnection: mongoose.connection })
         })

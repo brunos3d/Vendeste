@@ -10,7 +10,7 @@ router.get("/user", async (req, res) => {
     if (req.session.userId) {
         return req.nextapp.render(req, res, "/user");
     } else {
-        return res.redirect("/");
+        return req.nextapp.render(req, res, "/");
     }
 });
 

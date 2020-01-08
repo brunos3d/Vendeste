@@ -28,10 +28,14 @@ const Index = ({ user }) => {
 Index.getInitialProps = async ({ req, query }) => {
     let { user } = query;
 
+    console.log(user);
+
     if (!user) {
         const response = await APIGet(req, "/user");
         user = response.data;
     }
+
+    console.log(user);
 
     return { user, ...query };
 };

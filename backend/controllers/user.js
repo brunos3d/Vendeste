@@ -2,6 +2,8 @@ const UserModel = require("../models/user");
 
 module.exports = {
     async index(req, res) {
+        console.log("'base_url/api/user' req.session.userId", req.session.userId);
+
         const user = await UserModel.findById(req.session.userId);
 
         user.password = undefined;

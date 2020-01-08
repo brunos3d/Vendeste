@@ -37,20 +37,29 @@ nextapp.prepare().then(() => {
 
     server.disable("x-powered-by");
 
-    server.use(cors({ origin: baseURL, credentials: true }));
+    server.use(cors());
+    // server.use(cors({ origin: "*", credentials: true }));
+    // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
     // iniciar sessao de usuário no mongo
     // por padrão a sessao expira em 14 dias
     server.use(
         session({
+            resave: false,
+            // nome do cookie
+            name: "exss",
+            unset: "destroy",
+            // salva a sessao no banco apenas quando o user eh autenticado/registrado
+            saveUninitialized: false,
             // tempo de vida do token (segundos)
             ttl: TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
-            resave: true,
-            saveUninitialized: true,
             cookie: {
-                secure: "auto"
+                httpOnly: false,
+                secure: !development_mode
+                // tempo de vida do cookie (milisegundos)
+                // maxAge: process.env.COOKIE_MAX_AGE
             },
             store: new MongoStore({ mongooseConnection: mongoose.connection })
         })

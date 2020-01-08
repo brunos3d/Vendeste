@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+import { api } from "../../../shared/services/api";
+
 import { Container } from "./styles";
 
-import api from "../../services/api";
 import LoginForm from "../LoginForm";
 import LoginInput from "../LoginInput";
 
@@ -20,7 +21,7 @@ export default function LoginSignInForm({ showTriangle }) {
             })
             .then(res => {
                 console.log(res);
-                if (res.status == 200) {
+                if (res.status == 200 && res.data.success) {
                     window.location.href = "/";
                 }
             });

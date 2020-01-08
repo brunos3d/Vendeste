@@ -1,13 +1,18 @@
-const express = require("express");
+const UserModel = require("../models/user");
 
-const router = express.Router();
+module.exports = {
+    async index(req, res) {
+        const user = await UserModel.findById(req.session.userId);
 
-router.get("/wishlist", async (req, res) => {
-    return res.send([
-        { product: "touca", price: 29.99 },
-        { product: "sapato", price: 9.99 },
-        { product: "camiseta", price: 19.99 }
-    ]);
-});
+        user.password = undefined;
 
-module.exports = router;
+        return res.send({
+            ...user,
+            wishlist: [
+                { product: "touca", price: 29.99 },
+                { product: "sapato", price: 9.99 },
+                { product: "camiseta", price: 19.99 }
+            ]
+        });
+    }
+};

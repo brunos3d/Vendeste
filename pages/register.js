@@ -8,15 +8,11 @@ const Register = () => (
     <Container>
         <PageInfo title="Vendesto - Registrar" description="Venha fazer parte do Vendesto" />
         <Navbar />
+        <h1>Register</h1>
         <div className="flex-column-center">
             <LoginSignUpForm />
         </div>
     </Container>
 );
-
-// Register.getInitialProps = async ctx => {
-//     const { query } = ctx;
-//     return { ...query };
-// };
 
 export default Register;

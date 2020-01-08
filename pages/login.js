@@ -9,16 +9,12 @@ const Login = () => {
         <Container>
             <PageInfo title="Vendesto - Entrar" description="Venha fazer parte do Vendesto" />
             <Navbar />
+            <h1>Login</h1>
             <div className="flex-column-center">
                 <LoginSignInForm />
             </div>
         </Container>
     );
 };
-
-// Login.getInitialProps = async ctx => {
-//     const { query } = ctx;
-//     return { ...query };
-// };
 
 export default Login;

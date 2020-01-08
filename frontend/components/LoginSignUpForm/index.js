@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+import { api } from "../../../shared/services/api";
+
 import { Container } from "./styles";
 
-import api from "../../services/api";
 import LoginForm from "../LoginForm";
 import LoginInput from "../LoginInput";
 
@@ -29,7 +30,7 @@ export default function LoginSignUpForm({ showTriangle }) {
             password
         }).then(res => {
             console.log(res);
-            if (res.status == 200) {
+            if (res.status == 200 && res.data.success) {
                 window.location.href = "/";
             }
         });
@@ -42,6 +43,8 @@ export default function LoginSignUpForm({ showTriangle }) {
                     required
                     type="text"
                     placeholder="Nome completo"
+                    pattern="[a-zA-Z]+"
+                    title="O nome deve conter apenas letras!"
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
@@ -49,6 +52,8 @@ export default function LoginSignUpForm({ showTriangle }) {
                     required
                     type="text"
                     placeholder="Nome de usuário"
+                    pattern="[a-zA-Z0-9]+"
+                    title="O nome de usuário deve conter apenas caracteres alfanuméricos!"
                     value={username}
                     onChange={event => setUsername(event.target.value)}
                 />

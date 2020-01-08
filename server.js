@@ -37,8 +37,8 @@ nextapp.prepare().then(() => {
 
     server.disable("x-powered-by");
 
-    server.use(cors());
-    // server.use(cors({ origin: "*", credentials: true }));
+    // server.use(cors());
+    server.use(cors({ origin: "*", credentials: true }));
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
@@ -56,7 +56,7 @@ nextapp.prepare().then(() => {
             ttl: TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
             cookie: {
-                httpOnly: development_mode,
+                httpOnly: false,
                 secure: !development_mode
                 // tempo de vida do cookie (milisegundos)
                 // maxAge: process.env.COOKIE_MAX_AGE

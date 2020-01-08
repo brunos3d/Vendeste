@@ -1,11 +1,11 @@
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
 
-const Index = ({ message }) => (
+const Index = () => (
     <>
         <Page title="Vendesto - Inicio">
             <Navbar />
-            <h1>{message || "Home"}</h1>
+            <h1>Home</h1>
         </Page>
     </>
 );

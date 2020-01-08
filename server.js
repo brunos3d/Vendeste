@@ -42,6 +42,8 @@ nextapp.prepare().then(() => {
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
+    server.set("trust proxy", 1);
+
     // iniciar sessao de usuário no mongo
     // por padrão a sessao expira em 14 dias
     server.use(
@@ -56,7 +58,10 @@ nextapp.prepare().then(() => {
             ttl: TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
             cookie: {
-                secure: false,
+                // o certificado SSL eh encerrado pelo heroku antes de chegar ao app
+                // sendo
+                secure: true,
+                // secure: !development_mode
                 httpOnly: false
                 // tempo de vida do cookie (milisegundos)
                 // maxAge: process.env.COOKIE_MAX_AGE

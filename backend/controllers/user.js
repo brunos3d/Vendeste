@@ -7,7 +7,7 @@ module.exports = {
         user.password = undefined;
 
         return res.send({
-            ...user,
+            ...user._doc,
             wishlist: [
                 { product: "touca", price: 29.99 },
                 { product: "sapato", price: 9.99 },

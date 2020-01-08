@@ -56,7 +56,7 @@ nextapp.prepare().then(() => {
             ttl: TOKEN_EXPIRATION_TIME,
             secret: process.env.MONGO_SESSION_SECRET,
             cookie: {
-                httpOnly: false,
+                // httpOnly: false,
                 secure: !development_mode
                 // tempo de vida do cookie (milisegundos)
                 // maxAge: process.env.COOKIE_MAX_AGE

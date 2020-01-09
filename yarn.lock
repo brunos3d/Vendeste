@@ -3310,6 +3310,11 @@ loader-utils@1.2.3, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
+local-session-storage@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/local-session-storage/-/local-session-storage-1.2.4.tgz#e99992247b292f6765d5a997d7ebedda8e2105e4"
+  integrity sha512-NoId3CWvmOYRJNE0frd16I7wSHiHUTNz8zI7SM3i7VIFP126z0t9zm1WYxA8h2PqwsYRHUIVEPmZczAFykj9DA==
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"

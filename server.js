@@ -18,9 +18,6 @@ if (development_mode) {
 }
 
 const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD, MONGO_SESSION_SECRET, COOKIE_MAX_AGE } = process.env;
-
-const baseURL = development_mode ? `http://localhost:${PORT}` : "https://vendeste.herokuapp.com";
-
 const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
 
 mongoose.connect(DB_URI, {
@@ -75,6 +72,7 @@ nextapp.prepare().then(() => {
     server.use((req, res, next) => {
         // passar a referencia de instancia do next para todas as rotas
         req.nextapp = nextapp;
+        req.isAuth = req.session.hasOwnProperty("userId");
         // atualizar tempo de vida da sessao a cada requisicao
         // substituido passando o parametro "rolling=true"
         // req.session._garbage = Date();

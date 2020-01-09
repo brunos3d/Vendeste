@@ -1,15 +1,17 @@
+// import Storage from "local-session-storage";
+
 import { APIGet } from "../shared/services/api";
 
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
 
-const User = ({ user }) => {
+const User = ({ isAthenticated, user }) => {
     const { name, username, email, wishlist } = user;
 
     return (
         <>
             <Page title="Vendesto - Inicio">
-                <Navbar />
+                <Navbar isAthenticated={isAthenticated} />
                 <h1>User</h1>
                 <p>Nome: {name}</p>
                 <p>Email: {email}</p>
@@ -28,9 +30,15 @@ const User = ({ user }) => {
 User.getInitialProps = async ({ req, query }) => {
     let { user } = query;
 
+    // if (process.browser) {
+    //     user = Storage.Session.get("user_data");
+    // }
     if (!user) {
         const response = await APIGet(req, "/user");
         user = response.data;
+        // if (process.browser) {
+        //     Storage.Session.set("user_data", user);
+        // }
     }
 
     return { user, ...query };

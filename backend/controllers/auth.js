@@ -1,13 +1,7 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
 const UserModel = require("../models/user");
-
-function generateToken(params = {}) {
-    return jwt.sign(params, process.env.APP_SECRET, {
-        expiresIn: 86400
-    });
-}
 
 module.exports = {
     async register(req, res) {

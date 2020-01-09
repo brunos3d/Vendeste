@@ -45,21 +45,26 @@ nextapp.prepare().then(() => {
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
+    const maxAgeDate = new Date();
+    maxAgeDate.setSeconds(maxAgeDate.getSeconds() + COOKIE_MAX_AGE);
+
     // server.use(cookieParser());
     // iniciar sessao de usuário no mongo
-    // por padrão a sessao expira em 14 dias
     server.use(
         session({
-            resave: false,
             // nome do cookie
             name: "exss",
             unset: "destroy",
+            // atualizar tempo de vida da sessao a cada requisicao
+            rolling: true,
+            resave: false,
             // salva a sessao no banco apenas quando o user eh autenticado/registrado
             saveUninitialized: false,
             // tempo de vida do token (segundos)
             ttl: TOKEN_EXPIRATION_TIME,
             secret: MONGO_SESSION_SECRET,
             cookie: {
+                maxAge: maxAgeDate,
                 httpOnly: false,
                 secure: !development_mode
             },
@@ -67,9 +72,13 @@ nextapp.prepare().then(() => {
         })
     );
 
-    // passar a referencia de instancia do next para todas as rotas
     server.use((req, res, next) => {
+        // passar a referencia de instancia do next para todas as rotas
         req.nextapp = nextapp;
+        // atualizar tempo de vida da sessao a cada requisicao
+        // substituido passando o parametro "rolling=true"
+        // req.session._garbage = Date();
+        // req.session.touch();
         next();
     });
 

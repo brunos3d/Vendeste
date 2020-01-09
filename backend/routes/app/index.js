@@ -16,14 +16,16 @@ router.get("/user", async (req, res) => {
 
 router.get("/login", (req, res) => {
     if (req.session.userId) {
-        return res.redirect("/");
+        // return res.redirect("/");
+        return res.redirect("/user");
     }
     return req.nextapp.render(req, res, "/login");
 });
 
 router.get("/register", (req, res) => {
     if (req.session.userId) {
-        return res.redirect("/");
+        // return res.redirect("/");
+        return res.redirect("/user");
     }
     return req.nextapp.render(req, res, "/register");
 });

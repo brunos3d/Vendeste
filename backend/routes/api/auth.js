@@ -10,20 +10,24 @@ router.post("/register", async (req, res) => {
     try {
         const { email, name, username } = req.body;
 
-        if (!validator.isEmail(email)) {
-            return res.status(400).send({ error: "Use um endereço de email válido!" });
-        }
-
-        if (!validator.isAlpha(name)) {
-            return res.status(400).send({ error: "O nome deve conter apenas letras!" });
-        }
-
-        if (!validator.isAlphanumeric(username)) {
-            return res.status(400).send({ error: "O nome de usuário deve conter apenas caracteres alfanuméricos!" });
+        if (validator.isEmpty(email) || validator.isEmpty(name) || validator.isEmpty(username)) {
+            return res.status(400).send({ error: "A requisição contém campos vazios!" });
         }
 
         if (await UserModel.findOne({ email })) {
             return res.status(400).send({ error: "Este email já está cadastrado!" });
+        }
+
+        if (!validator.isEmail(email)) {
+            return res.status(400).send({ error: "Use um endereço de email válido!" });
+        }
+
+        if (!/^[a-zA-Z\s]*$/.test(name)) {
+            return res.status(400).send({ error: "O nome deve conter apenas letras!" });
+        }
+
+        if (!/^[a-zA-Z0-9]*$/.test(username)) {
+            return res.status(400).send({ error: "O nome de usuário deve conter apenas caracteres alfanuméricos!" });
         }
 
         const user = await UserModel.create(req.body);

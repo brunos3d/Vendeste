@@ -43,7 +43,7 @@ export default function LoginSignUpForm({ showTriangle }) {
                     required
                     type="text"
                     placeholder="Nome completo"
-                    pattern="[a-zA-Z]+"
+                    pattern="^[a-zA-Z\s]*$"
                     title="O nome deve conter apenas letras!"
                     value={name}
                     onChange={event => setName(event.target.value)}
@@ -52,7 +52,7 @@ export default function LoginSignUpForm({ showTriangle }) {
                     required
                     type="text"
                     placeholder="Nome de usuário"
-                    pattern="[a-zA-Z0-9]+"
+                    pattern="^[a-zA-Z0-9]*$"
                     title="O nome de usuário deve conter apenas caracteres alfanuméricos!"
                     value={username}
                     onChange={event => setUsername(event.target.value)}

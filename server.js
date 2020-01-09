@@ -46,7 +46,7 @@ nextapp.prepare().then(() => {
     server.use(bodyParser.json());
 
     const maxAgeDate = new Date();
-    maxAgeDate.setSeconds(maxAgeDate.getSeconds() + COOKIE_MAX_AGE);
+    maxAgeDate.setDate(maxAgeDate.getDate() + parseInt(COOKIE_MAX_AGE));
 
     // server.use(cookieParser());
     // iniciar sessao de usuário no mongo

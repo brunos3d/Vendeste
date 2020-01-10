@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
     {
         name: {
             type: String,
@@ -21,7 +22,8 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             select: false
-        }
+        },
+        wishlist: [{ type: Schema.Types.ObjectId, ref: "Product" }]
     },
     {
         timestamps: true
@@ -29,9 +31,10 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre("save", async function(next) {
-    const hash = await bcrypt.hash(this.password, 7);
-    this.password = hash;
-    next();
+    bcrypt.hash(this.password, 10).then(hash => {
+        this.password = hash;
+        next();
+    });
 });
 
 const UserModel = mongoose.model("User", UserSchema);

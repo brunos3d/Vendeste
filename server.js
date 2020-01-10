@@ -42,9 +42,6 @@ nextapp.prepare().then(() => {
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
 
-    const maxAgeDate = new Date();
-    maxAgeDate.setDate(maxAgeDate.getDate() + parseInt(COOKIE_MAX_AGE));
-
     // server.use(cookieParser());
     // iniciar sessao de usuário no mongo
     server.use(
@@ -58,10 +55,10 @@ nextapp.prepare().then(() => {
             // salva a sessao no banco apenas quando o user eh autenticado/registrado
             saveUninitialized: false,
             // tempo de vida do token (segundos)
-            ttl: TOKEN_EXPIRATION_TIME,
+            ttl: +TOKEN_EXPIRATION_TIME,
             secret: MONGO_SESSION_SECRET,
             cookie: {
-                maxAge: maxAgeDate,
+                maxAge: +COOKIE_MAX_AGE,
                 httpOnly: false,
                 secure: !development_mode
             },

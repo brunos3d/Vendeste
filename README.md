@@ -17,7 +17,7 @@ Apos instalar todas as dependências já podemos estar levantando nosso servidor
 yarn dev
 ```
 
-Por padrão nosso servidor estará rodando na porta `3333` (http://localhost:3333)
+Por padrão nosso servidor estará rodando na porta `3333` (http://localhost:3333).
 
 # Servidor
 

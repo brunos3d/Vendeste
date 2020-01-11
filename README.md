@@ -2,6 +2,23 @@
 
 NEXT.JS - Plataforma de compra e vendas.
 
+# Inicialização
+
+Para levantar o servidor tenha certeza de que todas as variáveis de ambiente foram devidamente preenchidas, vide [Arquivo ENV](#arquivo-env)
+Após checarmos isso podemos utilizar o [yarn](https://yarnpkg.com/pt-BR/) para instalar nossas dependências, para isso execute o seguinte comandono terminal:
+
+```console
+yarn install
+```
+
+Apos instalar todas as dependências já podemos estar levantando nosso servidor em modo de desenvolvimento, para isso execute o seguinte comandono terminal:
+
+```console
+yarn dev
+```
+
+Por padrão nosso servidor estará rodando na porta `3333` (http://localhost:3333)
+
 # Servidor
 
 O servidor roda em Node com o [express](https://www.npmjs.com/package/express) sendo responsável pelo gerenciamento de rotas.

@@ -10,7 +10,7 @@ const Navbar = ({ isAuth, router }) => {
     // Um filtro simples para evitar o carregamento desnecessário da pagina atual
     function linkHandler(event, href) {
         event.preventDefault();
-        if ((href == "/" && route != "/") || (href != "/" && !route.startsWith(href))) {
+        if (href != route) {
             Router.push(href);
         }
     }
@@ -32,7 +32,7 @@ const Navbar = ({ isAuth, router }) => {
                             <Link href="/user">
                                 <a
                                     onClick={e => linkHandler(e, "/user")}
-                                    className={`link ${route.startsWith("/user") ? "active-link" : ""}`}
+                                    className={`link ${route == "/user" ? "active-link" : ""}`}
                                 >
                                     User
                                 </a>
@@ -42,7 +42,7 @@ const Navbar = ({ isAuth, router }) => {
                                 <Link href="/login">
                                     <a
                                         onClick={e => linkHandler(e, "/login")}
-                                        className={`link ${route.startsWith("/login") ? "active-link" : ""}`}
+                                        className={`link ${route == "/login" ? "active-link" : ""}`}
                                     >
                                         Login
                                     </a>
@@ -50,7 +50,7 @@ const Navbar = ({ isAuth, router }) => {
                                 <Link href="/register">
                                     <a
                                         onClick={e => linkHandler(e, "/register")}
-                                        className={`link ${route.startsWith("/register") ? "active-link" : ""}`}
+                                        className={`link ${route == "/register" ? "active-link" : ""}`}
                                     >
                                         Register
                                     </a>

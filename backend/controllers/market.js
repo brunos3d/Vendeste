@@ -5,9 +5,14 @@ module.exports = {
     async index(req, res) {
         const { country } = req.body;
 
-        MarketModel.findOne({ country }).then(market => {
-            return res.send(market);
-        });
+        MarketModel.findOne({ country })
+            .then(market => {
+                return res.send(market);
+            })
+            .catch(error => {
+                // return res.status(400).send({ error });
+                return res.status(404).send({ error: "O mercado não pode ser encontrado!" });
+            });
     },
     async create(req, res) {
         const { country, products } = req.body;
@@ -18,7 +23,8 @@ module.exports = {
 
                 MarketModel.create({ country, ids })
                     .then(new_market => {
-                        return res.send(new_market);
+                        // return res.send(new_market);
+                        return res.send({ success: true });
                     })
                     .catch(error => {
                         if (error) {

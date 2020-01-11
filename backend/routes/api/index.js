@@ -20,6 +20,7 @@ router.post("/market/create", MarketController.create);
 
 router.use("/user", authCheckerMiddleware);
 router.get("/user", UserController.index);
+
 router.get("/user/wishlist/index", WishlistController.index);
 router.post("/user/wishlist/additem", WishlistController.additem);
 

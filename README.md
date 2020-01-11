@@ -1,2 +1,2 @@
 # Vendeste
- NODE.JS + REACT.JS - Plataforma de compra e vendas.
+ NEXT.JS - Plataforma de compra e vendas.

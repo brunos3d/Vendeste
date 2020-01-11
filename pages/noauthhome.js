@@ -9,7 +9,7 @@ const Index = ({ products }) => {
     return (
         <>
             <Page title="Vendesto - Inicio">
-                <Navbar />
+                <Navbar isAuth={false} />
                 <h1>Home</h1>
                 {products && <h2>Compre, compre, compre!</h2>}
                 {products &&

@@ -8,7 +8,7 @@ const Login = () => {
     return (
         <Container>
             <PageInfo title="Vendesto - Entrar" description="Venha fazer parte do Vendesto" />
-            <Navbar />
+            <Navbar isAuth={false} />
             <h1>Login</h1>
             <div className="flex-column-center">
                 <LoginSignInForm />

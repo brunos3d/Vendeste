@@ -5,13 +5,13 @@ import { APIGet } from "../shared/services/api";
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
 
-const User = ({ isAthenticated, user }) => {
+const User = ({ user }) => {
     const { name, username, email, wishlist } = user;
 
     return (
         <>
             <Page title="Vendesto - Inicio">
-                <Navbar isAthenticated={isAthenticated} />
+                <Navbar isAuth={true} />
                 <h1>User</h1>
                 <p>Nome: {name}</p>
                 <p>Email: {email}</p>

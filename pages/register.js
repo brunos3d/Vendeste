@@ -7,7 +7,7 @@ import LoginSignUpForm from "../frontend/components/LoginSignUpForm";
 const Register = () => (
     <Container>
         <PageInfo title="Vendesto - Registrar" description="Venha fazer parte do Vendesto" />
-        <Navbar />
+        <Navbar isAuth={false} />
         <h1>Register</h1>
         <div className="flex-column-center">
             <LoginSignUpForm />

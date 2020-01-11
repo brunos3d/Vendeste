@@ -3,7 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    return req.nextapp.render(req, res, "/");
+    if (req.isAuth) {
+        return req.nextapp.render(req, res, "/home");
+    } else {
+        return req.nextapp.render(req, res, "/noauthhome");
+    }
+});
+
+router.get("/noauthhome", async (req, res) => {
+    return res.redirect("/");
 });
 
 router.get("/user", async (req, res) => {

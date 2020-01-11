@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
     {
+        preview: {
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true

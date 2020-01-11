@@ -16,7 +16,7 @@ class MyApp extends App {
                     }
 
                     body {
-                        background-color: #ededed;
+                        background-color: #f5f5f5;
                     }
 
                     html,

@@ -4,24 +4,35 @@ import { APIGet } from "../shared/services/api";
 
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
+import AdCard from "../frontend/components/AdCard";
+
+import { Container } from "../frontend/styles/home";
 
 const Index = ({ products }) => {
     return (
-        <>
+        <Container>
             <Page title="Vendesto - Inicio">
                 <Navbar isAuth={true} />
                 <h1>Home</h1>
-                {products && <h2>Compre, compre, compre!</h2>}
-                {products &&
-                    products.map((item, id) => (
-                        <div className="product" key={id}>
-                            <h4>{item.name}</h4>
-                            <p>R$ {item.price}</p>
-                            <p>{item.description}</p>
-                        </div>
-                    ))}
+                {products && (
+                    <div className="product-container">
+                        <h2>Compre, compre, compre!</h2>
+                        <ul className="product-list">
+                            {products.map((item, id) => (
+                                <li key={id}>
+                                    <AdCard
+                                        price={item.price}
+                                        title={item.name}
+                                        description={item.description}
+                                        image={`/${item.preview}.jpg`}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </Page>
-        </>
+        </Container>
     );
 };
 

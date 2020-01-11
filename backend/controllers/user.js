@@ -1,17 +1,15 @@
 const UserModel = require("../models/user");
+const ProductModel = require("../models/product");
 
 module.exports = {
     async index(req, res) {
         UserModel.findById(req.session.userId).then(user => {
             user.password = undefined;
 
-            return res.send({
-                ...user._doc,
-                wishlist: [
-                    { product: "touca", price: 29.99 },
-                    { product: "sapato", price: 9.99 },
-                    { product: "camiseta", price: 19.99 }
-                ]
+            ProductModel.find({ _id: { $in: user.wishlist } }).then(products => {
+                user.wishlist = products;
+
+                return res.send(user);
             });
         });
     }

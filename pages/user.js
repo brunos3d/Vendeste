@@ -16,11 +16,14 @@ const User = ({ isAthenticated, user }) => {
                 <p>Nome: {name}</p>
                 <p>Email: {email}</p>
                 <p>Nome de usuário: {username}</p>
+                {wishlist && <h2>Lista de desejos</h2>}
                 {wishlist &&
                     wishlist.map((item, id) => (
-                        <p key={id}>
-                            {item.product}: {item.price}
-                        </p>
+                        <div className="product" key={id}>
+                            <h4>{item.name}</h4>
+                            <p>R$ {item.price}</p>
+                            <p>{item.description}</p>
+                        </div>
                     ))}
             </Page>
         </>

@@ -8,9 +8,9 @@ module.exports = {
             return res.send(wishlist);
         });
     },
-    async store(req, res) {
+    async additem(req, res) {
         UserModel.findById(req.session.userId).then(user => {
-            const { productId } = req.headers;
+            const { productId } = req.body;
 
             user.wishlist.push(productId);
 

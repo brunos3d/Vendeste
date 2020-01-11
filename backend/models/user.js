@@ -25,9 +25,7 @@ const UserSchema = new Schema(
         },
         wishlist: [{ type: Schema.Types.ObjectId, ref: "Product" }]
     },
-    {
-        timestamps: true
-    }
+    { timestamps: true }
 );
 
 UserSchema.pre("save", async function(next) {

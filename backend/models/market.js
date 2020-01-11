@@ -5,13 +5,17 @@ const MarketSchema = new Schema(
     {
         country: {
             type: String,
+            unique: true,
             required: true
         },
-        products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
+        products: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Product"
+            }
+        ]
     },
-    {
-        timestamps: true
-    }
+    { timestamps: true }
 );
 
 const MarketModel = mongoose.model("Market", MarketSchema);

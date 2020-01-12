@@ -23,5 +23,6 @@ router.get("/user", UserController.index);
 
 router.get("/user/wishlist/index", WishlistController.index);
 router.post("/user/wishlist/additem", WishlistController.additem);
+router.delete("/user/wishlist/removeitem", WishlistController.removeitem);
 
 module.exports = router;

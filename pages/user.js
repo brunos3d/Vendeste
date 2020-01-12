@@ -1,12 +1,27 @@
 // import Storage from "local-session-storage";
+import Router from "next/router";
 
-import { APIGet } from "../shared/services/api";
+import { api, APIGet } from "../shared/services/api";
 
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
 
 const User = ({ user }) => {
     const { name, username, email, wishlist } = user;
+
+    function buttonClickHandler(event, productId) {
+        return api
+            .delete("/user/wishlist/removeitem", {
+                data: { productId }
+            })
+            .then(res => {
+                // console.log(res);
+                if (res.status == 200 && res.data.success) {
+                    Router.reload();
+                    // window.location.href = "/user";
+                }
+            });
+    }
 
     return (
         <>
@@ -18,11 +33,12 @@ const User = ({ user }) => {
                 <p>Nome de usuário: {username}</p>
                 {wishlist && <h2>Lista de desejos</h2>}
                 {wishlist &&
-                    wishlist.map((item, id) => (
+                    wishlist.map((product, id) => (
                         <div className="product" key={id}>
-                            <h4>{item.name}</h4>
-                            <p>R$ {item.price}</p>
-                            <p>{item.description}</p>
+                            <h4>{product.name}</h4>
+                            <p>R$ {product.price}</p>
+                            <p>{product.description}</p>
+                            <button onClick={e => buttonClickHandler(e, product._id)}>remover</button>
                         </div>
                     ))}
             </Page>

@@ -16,7 +16,7 @@ module.exports = {
         ProductModel.create(req.body)
             .then(new_product => {
                 // return res.send(new_product);
-                return res.send({ success: true });
+                return res.send({ success: true, result: new_product });
             })
             .catch(error => {
                 // return res.status(400).send({ error });

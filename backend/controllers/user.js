@@ -6,11 +6,13 @@ module.exports = {
         UserModel.findById(req.session.userId).then(user => {
             user.password = undefined;
 
-            ProductModel.find({ _id: { $in: user.wishlist } }).then(products => {
-                user.wishlist = products;
+            ProductModel.find({ _id: { $in: user.wishlist } })
+                .select(["-__v", "-createdAt", "-updatedAt"])
+                .then(products => {
+                    user.wishlist = products;
 
-                return res.send(user);
-            });
+                    return res.send(user);
+                });
         });
     }
 };

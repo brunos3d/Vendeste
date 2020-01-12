@@ -21,6 +21,8 @@ const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD, MONGO_SESSION_SEC
 const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
 
 mongoose.connect(DB_URI, {
+    // funcao depreciada: desativar para habilitar o metodo "findByIdAndUpdate"
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -41,6 +43,7 @@ nextapp.prepare().then(() => {
     // server.use(cors({ origin: "*", credentials: true }));
     // server.use(cors({ origin: baseURL, credentials: true }));
     server.use(bodyParser.json());
+    // server.use(bodyParser.urlencoded({ extended: true }));
 
     // server.use(cookieParser());
     // iniciar sessao de usuário no mongo

@@ -14,14 +14,17 @@ module.exports = {
             });
     },
     async additem(req, res) {
-        UserModel.findById(req.session.userId).then(user => {
-            const { productId } = req.body;
+        const { productId } = req.body;
 
-            user.wishlist.push(productId);
+        UserModel.findByIdAndUpdate(req.session.userId, { $addToSet: { wishlist: productId } }).then(user => {
+            return res.send({ success: true, result: user.wishlist });
+        });
+    },
+    async removeitem(req, res) {
+        const { productId } = req.body;
 
-            user.save().then(() => {
-                return res.send({ success: true });
-            });
+        UserModel.findByIdAndUpdate(req.session.userId, { $pull: { wishlist: productId } }).then(user => {
+            return res.send({ success: true, result: user.wishlist });
         });
     }
 };

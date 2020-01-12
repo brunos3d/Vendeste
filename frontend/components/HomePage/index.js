@@ -17,7 +17,8 @@ export default function HomePage({ isAuth, products }) {
                 .then(res => {
                     // console.log(res);
                     if (res.status == 200 && res.data.success) {
-                        window.location.href = "/user";
+                        Router.push("/user");
+                        // window.location.href = "/user";
                     }
                 });
         } else {

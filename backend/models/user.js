@@ -28,11 +28,10 @@ const UserSchema = new Schema(
     { timestamps: true }
 );
 
-UserSchema.pre("save", async function(next) {
-    bcrypt.hash(this.password, 10).then(hash => {
-        this.password = hash;
-        next();
-    });
+UserSchema.pre("save", function(next) {
+    const hash = bcrypt.hashSync(this.password, 10);
+    this.password = hash;
+    next();
 });
 
 const UserModel = mongoose.model("User", UserSchema);

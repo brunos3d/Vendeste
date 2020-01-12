@@ -4,7 +4,7 @@ export const Container = styled.div`
     * {
         margin: 0;
         padding: 0;
-        font-family: "Work Sans", -apple-system, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+        font-family: "Open Sans", -apple-system, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
     }
 
     & {

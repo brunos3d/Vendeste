@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.a`
+    * {
+        font-family: "Work Sans", -apple-system, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+    }
+
     & {
         background-color: #fff;
 

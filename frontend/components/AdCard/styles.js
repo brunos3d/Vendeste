@@ -18,6 +18,7 @@ export const Container = styled.a`
         justify-content: center;
 
         color: #333;
+        border: 1px solid #444;
         font-size: 16px;
         text-decoration: none;
 
@@ -33,9 +34,10 @@ export const Container = styled.a`
         width: 100%;
         height: 200px;
 
-        border-radius: 5px 5px 0 0;
+        border-radius: 3px 3px 0 0;
 
-        object-fit: scale-down;
+        object-fit: cover;
+        /* object-fit: scale-down; */
     }
 
     & > footer {
@@ -44,28 +46,29 @@ export const Container = styled.a`
         display: flex;
         flex-direction: column;
 
+        align-items: center;
+
         background: #fff;
-        border: 1px solid #eee;
 
         text-align: left;
         border-radius: 0 0 5px 5px;
     }
 
     & .ui-price {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         color: #333;
         font-weight: 700;
     }
 
     & .ui-title {
+        margin-top: 0.2rem;
         font-size: 1rem;
         color: #222;
-        margin-top: 0.25rem;
     }
 
     & .ui-description {
+        margin-top: 0.25rem;
         font-size: 0.8rem;
         color: #999;
-        margin-top: 0.25rem;
     }
 `;

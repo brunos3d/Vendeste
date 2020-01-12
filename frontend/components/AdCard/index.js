@@ -15,7 +15,7 @@ export default function AdCard(props) {
             <footer>
                 <span className="ui-price">{formatter.format(price).replace("$", "$ ")}</span>
                 <span className="ui-title">{title}</span>
-                <span className="ui-description">{description}</span>
+                {/* <span className="ui-description">{description}</span> */}
             </footer>
         </Container>
     );

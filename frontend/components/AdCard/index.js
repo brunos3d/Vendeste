@@ -11,9 +11,9 @@ export default function AdCard(props) {
         <Container {...linkProps}>
             <img src={image} />
             <footer>
-                <span>{title}</span>
-                <span>{price}</span>
-                <span>{description}</span>
+                <span className="ui-price">R$ {price.toLocaleString("pt-BR")}</span>
+                <span className="ui-title">{title}</span>
+                <span className="ui-description">{description}</span>
             </footer>
         </Container>
     );

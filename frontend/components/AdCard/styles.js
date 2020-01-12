@@ -34,7 +34,6 @@ export const Container = styled.a`
     }
 
     & > footer {
-        flex: 1;
         padding: 15px 28px;
 
         display: flex;
@@ -45,5 +44,24 @@ export const Container = styled.a`
 
         text-align: left;
         border-radius: 0 0 5px 5px;
+    }
+
+    & .ui-price {
+        color: #333;
+        font-weight: 700;
+    }
+
+    & .ui-title {
+        font-size: 1rem;
+
+        color: #222;
+        margin-top: 0.5rem;
+    }
+
+    & .ui-description {
+        font-size: 0.8rem;
+
+        color: #999;
+        margin-top: 0.25rem;
     }
 `;

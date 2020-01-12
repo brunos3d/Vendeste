@@ -6,6 +6,7 @@ export const Container = styled.a`
     }
 
     & {
+        cursor: pointer;
         background-color: #fff;
 
         border-radius: 5px;
@@ -51,20 +52,19 @@ export const Container = styled.a`
     }
 
     & .ui-price {
+        font-size: 1.5rem;
         color: #333;
         font-weight: 700;
     }
 
     & .ui-title {
         font-size: 1rem;
-
         color: #222;
-        margin-top: 0.5rem;
+        margin-top: 0.25rem;
     }
 
     & .ui-description {
         font-size: 0.8rem;
-
         color: #999;
         margin-top: 0.25rem;
     }

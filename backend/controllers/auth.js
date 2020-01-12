@@ -6,9 +6,14 @@ const UserModel = require("../models/user");
 module.exports = {
     async register(req, res) {
         try {
-            const { email, name, username } = req.body;
+            const { email, password, name, username } = req.body;
 
-            if (validator.isEmpty(email) || validator.isEmpty(name) || validator.isEmpty(username)) {
+            if (
+                validator.isEmpty(email) ||
+                validator.isEmpty(password) ||
+                validator.isEmpty(name) ||
+                validator.isEmpty(username)
+            ) {
                 return res.status(400).send({ error: "A requisição contém campos vazios!" });
             }
 
@@ -31,7 +36,12 @@ module.exports = {
                         .send({ error: "O nome de usuário deve conter apenas caracteres alfanuméricos!" });
                 }
 
-                UserModel.create(req.body).then(new_user => {
+                // criptografar a senha para garantir que caso eles
+                // sejam acessados por qualquer tipo de fonte desconhecida
+                // os dados do usuário ainda estejam protegidos
+                const hash = bcrypt.hashSync(password, 10);
+
+                UserModel.create({ email, password: hash, name, username }).then(new_user => {
                     new_user.password = undefined;
 
                     req.session.userId = new_user.id;

@@ -5,56 +5,19 @@ import { APIGet } from "../shared/services/api";
 
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
-import AdCard from "../frontend/components/AdCard";
+import HomePage from "../frontend/components/HomePage";
 
 import { Container } from "../frontend/styles/home";
 
-const Index = ({ products }) => {
-    async function cardClickHandler(event) {
-        event.preventDefault();
-        Router.push("/register");
-    }
-
-    return (
-        <Container>
-            <Page title="Vendesto - Inicio">
-                <Navbar isAuth={false} />
-                <h1>Home (não autenticado)</h1>
-                {products && (
-                    <div className="product-container">
-                        <h2>Compre, compre, compre!</h2>
-                        <ul className="product-list">
-                            {products.map((product, id) => (
-                                <li key={id}>
-                                    <AdCard
-                                        onClick={cardClickHandler}
-                                        href="https://www.google.com"
-                                        price={product.price}
-                                        title={product.name}
-                                        description={product.description}
-                                        image={`/${product.preview}.jpg`}
-                                    />
-                                </li>
-                            ))}
-                            {products.map((product, id) => (
-                                <li key={id}>
-                                    <AdCard
-                                        onClick={e => cardClickHandler(e, product._id)}
-                                        href="https://www.google.com"
-                                        price={product.price}
-                                        title={product.name}
-                                        description={product.description}
-                                        image={`/${product.preview}.jpg`}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </Page>
-        </Container>
-    );
-};
+const Index = ({ products }) => (
+    <Container>
+        <Page title="Vendesto - Inicio">
+            <Navbar isAuth={false} />
+            <h1>Home (não autenticado)</h1>
+            <HomePage isAuth={false} products={products} />
+        </Page>
+    </Container>
+);
 
 Index.getInitialProps = async ({ req, query }) => {
     let products = undefined;

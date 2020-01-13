@@ -14,12 +14,12 @@
         "url": "https://github.com/BrunoS3D/Vendeste/issues"
     },
     "engines": {
-        "node": "12.13.1",
-        "npm": "6.12.1",
-        "yarn": "1.19.2"
+        "node": "^12.13.1",
+        "npm": "^6.12.1",
+        "yarn": "^1.19.2"
     },
     "scripts": {
-        "dev": "set NODE_ENV=development && nodemon server.js",
+        "dev": "export NODE_ENV=development && set NODE_ENV=development && nodemon server.js",
         "build": "next build",
         "start": "node server.js",
         "heroku-postbuild": "yarn build"

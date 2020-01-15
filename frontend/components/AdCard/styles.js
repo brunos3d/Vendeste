@@ -34,7 +34,7 @@ export const Container = styled.a`
         width: 100%;
         height: 200px;
 
-        border-radius: 3px 3px 0 0;
+        border-radius: 5px 5px 0 0;
 
         object-fit: cover;
         /* object-fit: scale-down; */

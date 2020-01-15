@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Router, { withRouter } from "next/router";
+import { withRouter } from "next/router";
 
 import { Container } from "./styles";
 

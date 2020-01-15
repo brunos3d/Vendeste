@@ -8,6 +8,8 @@ class MyApp extends App {
 
         return (
             <Container>
+                <Component {...pageProps} />
+
                 <style jsx global>{`
                     * {
                         margin: 0;
@@ -28,8 +30,6 @@ class MyApp extends App {
                         height: 100%;
                     }
                 `}</style>
-
-                <Component {...pageProps} />
             </Container>
         );
     }

@@ -1,6 +1,5 @@
 {
     "verbose": true,
-    "ignore": ["node_modules", ".next"],
-    "watch": ["server.js", "packages.json", ".env.development.local", "backend/", "shared/"],
-    "ext": "js json"
+    "ignore": ["node_modules", ".next", "frontend", "pages", "public"],
+    "ext": "js json less"
 }

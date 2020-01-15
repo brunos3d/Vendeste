@@ -4,7 +4,6 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
@@ -46,7 +45,7 @@ nextapp.prepare().then(() => {
     server.use(cors());
     // server.use(cors({ origin: "*", credentials: true }));
     // server.use(cors({ origin: baseURL, credentials: true }));
-    server.use(bodyParser.json());
+    server.use(express.json());
     // server.use(bodyParser.urlencoded({ extended: true }));
 
     // server.use(cookieParser());

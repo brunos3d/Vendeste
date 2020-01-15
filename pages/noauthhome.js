@@ -1,7 +1,4 @@
-import Router from "next/router";
-import Storage from "local-session-storage";
-
-import { APIGet } from "../shared/services/api";
+import { api } from "../shared/services/api";
 
 import Page from "../frontend/components/Page";
 import Navbar from "../frontend/components/Navbar";
@@ -19,28 +16,16 @@ const Index = ({ products }) => (
     </Container>
 );
 
-Index.getInitialProps = async ({ req, query }) => {
-    let products = undefined;
-
-    if (process.browser) {
-        const data = Storage.Session.get("products_data");
-
-        if (data) {
-            products = data.products;
-        }
-    }
+Index.getInitialProps = async ({ query }) => {
+    let { products } = query;
 
     if (!products) {
-        const response = await APIGet(req, "/product/index");
+        const response = await api.get("/products");
 
         products = response.data;
-
-        if (process.browser) {
-            Storage.Session.set("products_data", { products });
-        }
     }
 
-    return { products, ...query };
+    return { products };
 };
 
 export default Index;

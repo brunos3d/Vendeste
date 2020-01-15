@@ -12,7 +12,9 @@ const router = express.Router();
 router.post("/auth/register", AuthControler.register);
 router.post("/auth/authenticate", AuthControler.authenticate);
 
-router.get("/product/index", ProductController.index);
+router.get("/products", ProductController.getAll);
+
+router.get("/product/:id", ProductController.findById);
 router.post("/product/create", ProductController.create);
 
 router.get("/market/index", MarketController.index);

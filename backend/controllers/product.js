@@ -1,7 +1,7 @@
 const ProductModel = require("../models/product");
 
 module.exports = {
-    async index(req, res) {
+    async getAll(req, res) {
         ProductModel.find({})
             .select(["-__v", "-createdAt", "-updatedAt"])
             .then(products => {
@@ -10,6 +10,19 @@ module.exports = {
             .catch(error => {
                 // return res.status(400).send({ error });
                 return res.status(404).send({ error: "Os produtos não foram encontrados!" });
+            });
+    },
+    async findById(req, res) {
+        const productId = req.params.id;
+
+        ProductModel.findById(productId)
+            .select(["-__v", "-createdAt", "-updatedAt"])
+            .then(product => {
+                return res.send(product);
+            })
+            .catch(error => {
+                // return res.status(400).send({ error });
+                return res.status(404).send({ error: "O produto não pode ser encontrado!" });
             });
     },
     async create(req, res) {

@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 const development_mode = (process.env.NODE_ENV || "return").includes("development");
 const use_localhost = development_mode || !process.browser;
@@ -10,13 +10,13 @@ const config = {
     baseURL: baseURL + "/api"
 };
 
-export const api = axios.create(config);
+const api = axios.create(config);
 
 // forcar o uso de credenciais
 api.defaults.withCredentials = true;
 
 // use isso para chamadas isomorficas client/server
-export function APIGet(req, url, config) {
+function APIGet(req, url, config) {
     if (req) {
         return api.get(url, { headers: req.headers, ...config });
     } else {
@@ -25,10 +25,18 @@ export function APIGet(req, url, config) {
 }
 
 // use isso para chamadas isomorficas client/server
-export function APIPost(req, url, config) {
+function APIPost(req, url, config) {
     if (req) {
         return api.post(url, { headers: req.headers, ...config });
     } else {
         return api.post(url, config);
     }
 }
+
+module.exports = {
+    api,
+    // use isso para chamadas isomorficas client/server
+    APIGet,
+    // use isso para chamadas isomorficas client/server
+    APIPost
+};

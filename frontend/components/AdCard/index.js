@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container } from "./styles";
 
-import formatter from "../../../shared/Internationalization/formatter";
+import formatter from "../../../shared/internationalization/formatter";
 
 export default function AdCard(props) {
     // desmembrar o objeto props e passar o resto das propriedas para o obj linkProps

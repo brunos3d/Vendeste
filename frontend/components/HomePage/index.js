@@ -9,21 +9,24 @@ export default function HomePage({ isAuth, products }) {
     async function cardClickHandler(event, productId) {
         event.preventDefault();
 
-        if (isAuth) {
-            return api
-                .post("/user/wishlist/additem", {
-                    productId
-                })
-                .then(res => {
-                    // console.log(res);
-                    if (res.status == 200 && res.data.success) {
-                        Router.push("/user");
-                        // window.location.href = "/user";
-                    }
-                });
-        } else {
-            Router.push("/register");
-        }
+        Router.push(`/product/?id=${productId}`);
+
+        // adicionar produto na lista de desejos
+        // if (isAuth) {
+        //     return api
+        //         .post("/user/wishlist/additem", {
+        //             productId
+        //         })
+        //         .then(res => {
+        //             // console.log(res);
+        //             if (res.status == 200 && res.data.success) {
+        //                 Router.push("/user");
+        //                 // window.location.href = "/user";
+        //             }
+        //         });
+        // } else {
+        //     Router.push("/register");
+        // }
     }
 
     return (

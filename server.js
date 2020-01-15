@@ -20,6 +20,10 @@ if (development_mode) {
 const { PORT, TOKEN_EXPIRATION_TIME, DB_USERNAME, DB_PASSWORD, MONGO_SESSION_SECRET, COOKIE_MAX_AGE } = process.env;
 const DB_URI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0-culqu.mongodb.net/${DB_USERNAME}?retryWrites=true&w=majority`;
 
+if (development_mode) {
+    console.log("MongoDB URI de conexão:", DB_URI);
+}
+
 mongoose.connect(DB_URI, {
     // funcao depreciada: desativar para habilitar o metodo "findByIdAndUpdate"
     useFindAndModify: false,

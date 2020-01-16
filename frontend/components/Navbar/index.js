@@ -29,6 +29,9 @@ const Navbar = ({ isAuth, router }) => {
                                 </Link>
                             </>
                         )}
+                        <Link href="/test">
+                            <a className={`link ${route == "/test" ? "active-link" : ""}`}>Test-Page</a>
+                        </Link>
                     </div>
                 </div>
             </div>

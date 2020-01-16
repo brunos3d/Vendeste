@@ -30,16 +30,44 @@ const Index = ({ products }) => (
         <div className="page-content">
             <div className="banner"></div>
 
-            <div className="section">
-                <h3 className="section-title">Eletrônicos</h3>
-                <div className="cards-list">
-                    {products.map((product, id) => (
-                        <div className="card" key={id}>
-                            <img className="card-preview" src={`./${product.preview}.jpg`} alt={product.name} />
-                            <div className="preview-gradient"></div>
-                            <span className="card-price">{formatter.format(product.price).replace("$", "$ ")}</span>
-                        </div>
-                    ))}
+            <div className="section-list">
+                <div className="section">
+                    <h3 className="section-title">Eletrônicos</h3>
+                    <div className="cards-list">
+                        {products.map((product, id) => (
+                            <div className="card" key={id}>
+                                <img className="card-preview" src={`./${product.preview}.jpg`} alt={product.name} />
+                                <div className="preview-gradient"></div>
+                                <span className="card-price">{formatter.format(product.price).replace("$", "$ ")}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="section">
+                    <h3 className="section-title">Casa e decoração</h3>
+                    <div className="cards-list">
+                        {products.map((product, id) => (
+                            <div className="card" key={id}>
+                                <img className="card-preview" src={`./${product.preview}.jpg`} alt={product.name} />
+                                <div className="preview-gradient"></div>
+                                <span className="card-price">{formatter.format(product.price).replace("$", "$ ")}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="section">
+                    <h3 className="section-title">Brinquedos e bebês</h3>
+                    <div className="cards-list">
+                        {products.map((product, id) => (
+                            <div className="card" key={id}>
+                                <img className="card-preview" src={`./${product.preview}.jpg`} alt={product.name} />
+                                <div className="preview-gradient"></div>
+                                <span className="card-price">{formatter.format(product.price).replace("$", "$ ")}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

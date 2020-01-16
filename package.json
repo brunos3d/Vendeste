@@ -19,7 +19,8 @@
         "yarn": "^1.19.2"
     },
     "scripts": {
-        "dev": "export NODE_ENV=development && set NODE_ENV=development && nodemon server.js",
+        "dev": "set NODE_ENV=development && nodemon server.js",
+        "devl": "export NODE_ENV=development && nodemon server.js",
         "build": "next build",
         "start": "node server.js",
         "heroku-postbuild": "yarn build"
